@@ -15,347 +15,364 @@
     }
     .container { max-width: 800px; margin: 0 auto; }
     .lang-switch {
-      position: fixed; top: 16px; right: 16px; z-index: 100;
-      display: flex; gap: 6px;
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 1000;
+      display: flex;
+      gap: 4px;
+      background: #0f172a;
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid #334155;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
     .lang-switch button {
-      background: #1e293b; color: #94a3b8; border: 1px solid #334155;
-      padding: 6px 12px; border-radius: 8px; cursor: pointer; font-weight: 600;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid #475569;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      min-width: 56px;
     }
-    .lang-switch button.active { background: #3b82f6; color: white; border-color: #3b82f6; }
-    header { text-align: center; padding: 48px 0 32px; }
+    .lang-switch button.active {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+    header { text-align: center; padding: 60px 0 32px; }
     .avatar {
       width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
       border: 3px solid #3b82f6; margin-bottom: 20px;
     }
-    h1 { font-size: 1.5rem; margin-bottom: 12px; line-height: 1.3; }
-    .subtitle { color: #94a3b8; font-size: 0.95rem; max-width: 600px; margin: 0 auto 8px; }
+    h1 { font-size: 1.45rem; margin-bottom: 12px; line-height: 1.3; }
+    .subtitle { color: #94a3b8; font-size: 0.95rem; max-width: 620px; margin: 0 auto 8px; }
     .section {
       background: #111827; border: 1px solid #1f2937; border-radius: 16px;
       padding: 24px; margin-bottom: 20px;
     }
     .section h2 {
       font-size: 1.15rem; margin-bottom: 16px; color: #60a5fa;
-      display: flex; align-items: center; gap: 8px;
     }
     .section p, .section li { margin-bottom: 10px; color: #cbd5e1; }
-    .section ul { padding-left: 20px; margin-bottom: 12px; }
     .profile-grid { display: grid; gap: 8px; }
     .profile-grid strong { color: #e2e8f0; }
     .socials { display: flex; flex-wrap: wrap; gap: 10px; }
     .socials a {
       background: #1e293b; color: #93c5fd; text-decoration: none;
       padding: 10px 16px; border-radius: 10px; font-size: 0.9rem;
-      border: 1px solid #334155; transition: background 0.2s;
+      border: 1px solid #334155;
     }
-    .socials a:hover { background: #334155; }
     .evidence {
       background: #0f172a; border-left: 4px solid #3b82f6;
       padding: 14px 16px; margin: 12px 0; border-radius: 0 10px 10px 0;
     }
-    .evidence a { color: #60a5fa; word-break: break-all; }
     .evidence .label { font-weight: 600; color: #e2e8f0; margin-bottom: 8px; }
-    .note { font-size: 0.9rem; color: #94a3b8; font-style: italic; }
-    .media {
-      margin-top: 10px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid #334155;
-      max-width: 100%;
-    }
-    .media img {
-      display: block;
-      width: 100%;
-      max-height: 420px;
-      object-fit: contain;
-      background: #000;
-    }
-    .media iframe {
-      display: block;
-      width: 100%;
-      height: 360px;
-      border: none;
-      background: #000;
-    }
-    .media-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 10px;
-    }
-    .media-row .media {
-      flex: 1 1 280px;
-      max-width: 100%;
-    }
-    /* Language switching - Spanish is default (no class needed for ES content) */
-    .lang-en, .lang-inline-en { display: none; }
-    
-    body.lang-en .lang-es,
-    body.lang-en .lang-inline-es { display: none; }
-    
-    body.lang-en .lang-en { display: block; }
-    body.lang-en .lang-inline-en { display: inline; }
-    body.lang-en strong.lang-en { display: inline; }
+    .note { font-size: 0.9rem; color: #94a3b8; font-style: italic; margin-top: 8px; }
+    .media { margin-top: 10px; border-radius: 10px; overflow: hidden; border: 1px solid #334155; }
+    .media img { display: block; width: 100%; max-height: 420px; object-fit: contain; background: #000; }
+    .media iframe { display: block; width: 100%; height: 360px; border: none; background: #000; }
+    .media-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+    .media-row .media { flex: 1 1 280px; }
     footer { text-align: center; margin-top: 40px; color: #64748b; font-size: 0.85rem; }
+
+    /* Simple language toggle */
+    .content-en { display: none; }
+    body.lang-en .content-es { display: none; }
+    body.lang-en .content-en { display: block; }
   </style>
 </head>
 <body>
   <div class="lang-switch">
-    <button onclick="setLang('es')" id="btn-es" class="active">ES</button>
-    <button onclick="setLang('en')" id="btn-en">EN</button>
+    <button type="button" id="btn-es" class="active">ES</button>
+    <button type="button" id="btn-en">EN</button>
   </div>
 
-  <div class="container">
-    <header>
-      <img 
-        src="https://drive.google.com/thumbnail?id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH&sz=w400" 
-        alt="Shae Finn holding jar of marijuana" 
-        class="avatar"
-        onerror="this.src='https://drive.google.com/uc?export=view&id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH'"
-      >
-      <h1 class="lang-en">Shae Leigh Finn – the gringa living in Ecuador who grows and consumes marijuana, refuses to speak Spanish, and lives off Ecuadorian taxpayers while using public services she barely pays for</h1>
-      <h1 class="lang-es">Shae Leigh Finn – la gringa que vive en Ecuador, cultiva y consume marihuana, se niega a hablar español y vive a costa del contribuyente ecuatoriano mientras usa servicios públicos que apenas paga</h1>
-      <p class="subtitle lang-en">Documentation compiled from her own social media posts, TikToks, Facebook statements and public admissions.</p>
-      <p class="subtitle lang-es">Documentación compilada a partir de sus propias publicaciones en redes sociales, TikToks, declaraciones de Facebook y admisiones públicas.</p>
-    </header>
+  <!-- SPANISH VERSION -->
+  <div class="content-es">
+    <div class="container">
+      <header>
+        <img src="https://drive.google.com/thumbnail?id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH&sz=w400" alt="Shae Finn" class="avatar" onerror="this.src='https://drive.google.com/uc?export=view&id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH'">
+        <h1>Shae Leigh Finn – la gringa que vive en Ecuador, cultiva y consume marihuana, se niega a hablar español y vive a costa del contribuyente ecuatoriano mientras usa servicios públicos que apenas paga</h1>
+        <p class="subtitle">Documentación compilada a partir de sus propias publicaciones en redes sociales, TikToks, declaraciones de Facebook y admisiones públicas.</p>
+      </header>
 
-    <!-- PROFILE -->
-    <div class="section">
-      <h2>👤 <span class="lang-inline-en">Profile</span><span class="lang-inline-es">Perfil</span></h2>
-      <div class="profile-grid">
-        <div><strong class="lang-en">Name:</strong><strong class="lang-es">Nombre:</strong> Shae Leigh Finn</div>
-        <div><strong class="lang-en">From:</strong><strong class="lang-es">Origen:</strong> Lubbock, Texas, United States</div>
-        <div><strong class="lang-en">Living in:</strong><strong class="lang-es">Residencia:</strong> Vilcabamba, Loja, Ecuador</div>
-        <div><strong class="lang-en">Husband:</strong><strong class="lang-es">Esposo:</strong> Michael Finn</div>
-      </div>
-    </div>
-
-    <!-- SOCIALS -->
-    <div class="section">
-      <h2>📱 <span class="lang-inline-en">Social media</span><span class="lang-inline-es">Redes sociales</span></h2>
-      <div class="socials">
-        <a href="https://www.tiktok.com/@lifeabroadwithshae" target="_blank" rel="noopener">TikTok @lifeabroadwithshae</a>
-        <a href="https://www.instagram.com/lifeabroadwithshae" target="_blank" rel="noopener">Instagram @lifeabroadwithshae</a>
-        <a href="https://www.facebook.com/shaeleighf" target="_blank" rel="noopener">Facebook shaeleighf</a>
-      </div>
-    </div>
-
-    <!-- 1. MARIJUANA & DRUGS -->
-    <div class="section">
-      <h2>🌿 <span class="lang-inline-en">1. Marijuana & Drug Use</span><span class="lang-inline-es">1. Marihuana y consumo de drogas</span></h2>
-
-      <p class="lang-en">Shae Finn openly posts about marijuana use and cultivation-related content while living in Ecuador on a visa.</p>
-      <p class="lang-es">Shae Finn publica abiertamente sobre el consumo de marihuana y contenido relacionado con el cultivo mientras vive en Ecuador con visa.</p>
-
-      <div class="evidence">
-        <div class="label lang-en">Holding a large jar of marijuana</div>
-        <div class="label lang-es">Sosteniendo un frasco grande de marihuana</div>
-        <div class="media">
-          <img src="https://drive.google.com/thumbnail?id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH&sz=w1000" alt="Shae Finn holding jar of marijuana" loading="lazy"
-               onerror="this.src='https://drive.google.com/uc?export=view&id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH'">
-        </div>
-        <div class="media" style="margin-top:12px">
-          <iframe src="https://drive.google.com/file/d/1kdAYeGvjSecVNyKsgUMLbFVXqdzvqLWG/preview" allow="autoplay" loading="lazy"></iframe>
+      <div class="section">
+        <h2>👤 Perfil</h2>
+        <div class="profile-grid">
+          <div><strong>Nombre:</strong> Shae Leigh Finn</div>
+          <div><strong>Origen:</strong> Lubbock, Texas, Estados Unidos</div>
+          <div><strong>Residencia:</strong> Vilcabamba, Loja, Ecuador</div>
+          <div><strong>Esposo:</strong> Michael Finn</div>
         </div>
       </div>
 
-      <div class="evidence">
-        <div class="label lang-en">Using hashtags #gardentok, #gardenmom, #gardening on the marijuana TikTok</div>
-        <div class="label lang-es">Usando los hashtags #gardentok, #gardenmom y #gardening en el TikTok de marihuana</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/1LfNPOMyWcMUij9AkyUCkXWdjWJUEAU0G/preview" allow="autoplay" loading="lazy"></iframe>
+      <div class="section">
+        <h2>📱 Redes sociales</h2>
+        <div class="socials">
+          <a href="https://www.tiktok.com/@lifeabroadwithshae" target="_blank" rel="noopener">TikTok @lifeabroadwithshae</a>
+          <a href="https://www.instagram.com/lifeabroadwithshae" target="_blank" rel="noopener">Instagram @lifeabroadwithshae</a>
+          <a href="https://www.facebook.com/shaeleighf" target="_blank" rel="noopener">Facebook shaeleighf</a>
         </div>
       </div>
 
-      <div class="evidence">
-        <div class="label lang-en">Saying she has a large property (where she will likely grow marijuana)</div>
-        <div class="label lang-es">Diciendo que tiene una propiedad grande (donde probablemente cultivará marihuana)</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/10vc4zMtqDnGoySox4yA_Ic6SVlUzABfW/preview" allow="autoplay" loading="lazy"></iframe>
+      <div class="section">
+        <h2>🌿 1. Marihuana y consumo de drogas</h2>
+        <p>Shae Finn publica abiertamente sobre el consumo de marihuana y contenido relacionado con el cultivo mientras vive en Ecuador con visa.</p>
+        <div class="evidence">
+          <div class="label">Sosteniendo un frasco grande de marihuana</div>
+          <div class="media"><img src="https://drive.google.com/thumbnail?id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH&sz=w1000" alt="Frasco de marihuana" loading="lazy"></div>
+          <div class="media" style="margin-top:12px"><iframe src="https://drive.google.com/file/d/1kdAYeGvjSecVNyKsgUMLbFVXqdzvqLWG/preview" allow="autoplay" loading="lazy"></iframe></div>
         </div>
-      </div>
-
-      <div class="evidence">
-        <div class="label lang-en">Photos of her smoking a joint</div>
-        <div class="label lang-es">Fotos de ella fumando un porro</div>
-        <div class="media-row">
-          <div class="media">
-            <img src="https://drive.google.com/thumbnail?id=1Gvc2p9syvPQGfL7a4-R5VhGYuk0k4nqO&sz=w800" alt="Smoking joint 1" loading="lazy"
-                 onerror="this.src='https://drive.google.com/uc?export=view&id=1Gvc2p9syvPQGfL7a4-R5VhGYuk0k4nqO'">
-          </div>
-          <div class="media">
-            <img src="https://drive.google.com/thumbnail?id=1EHsr9pqbVlf3AmNtwl6qlBY_akLqqLNY&sz=w800" alt="Smoking joint 2" loading="lazy"
-                 onerror="this.src='https://drive.google.com/uc?export=view&id=1EHsr9pqbVlf3AmNtwl6qlBY_akLqqLNY'">
+        <div class="evidence">
+          <div class="label">Usando los hashtags #gardentok, #gardenmom y #gardening en el TikTok de marihuana</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1LfNPOMyWcMUij9AkyUCkXWdjWJUEAU0G/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Diciendo que tiene una propiedad grande (donde probablemente cultivará marihuana)</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/10vc4zMtqDnGoySox4yA_Ic6SVlUzABfW/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Fotos de ella fumando un porro</div>
+          <div class="media-row">
+            <div class="media"><img src="https://drive.google.com/thumbnail?id=1Gvc2p9syvPQGfL7a4-R5VhGYuk0k4nqO&sz=w800" alt="Fumando 1" loading="lazy"></div>
+            <div class="media"><img src="https://drive.google.com/thumbnail?id=1EHsr9pqbVlf3AmNtwl6qlBY_akLqqLNY&sz=w800" alt="Fumando 2" loading="lazy"></div>
           </div>
         </div>
+        <div class="evidence">
+          <div class="label">Presumiendo de ir a Supermaxi con su esposo e hijos estando drogada — lo dice varias veces. Su esposo también estaba drogado.</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1rAPjraqZ-_eMZdQbXsyj-K1-mzprKzDM/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <p class="note">Nota: Cultivar o poseer cantidades significativas de marihuana y conducir/cuidar niños bajo la influencia son problemas serios bajo la ley ecuatoriana y preocupaciones de seguridad pública.</p>
       </div>
 
-      <div class="evidence">
-        <div class="label lang-en">Bragging about going to Supermaxi (supermarket) with husband and kids while stoned — she states it multiple times. Husband was also stoned.</div>
-        <div class="label lang-es">Presumiendo de ir a Supermaxi con su esposo e hijos estando drogada — lo dice varias veces. Su esposo también estaba drogado.</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/1rAPjraqZ-_eMZdQbXsyj-K1-mzprKzDM/preview" allow="autoplay" loading="lazy"></iframe>
+      <div class="section">
+        <h2>🗣️ 2. Negativa a hablar español y falta de respeto hacia los ecuatorianos</h2>
+        <p>En lugar de aprender el idioma local, se burla de las personas que le dicen que hable español y comparte contenido enseñando cómo decirle a los ecuatorianos que se callen.</p>
+        <div class="evidence">
+          <div class="label">Burlándose de la gente por decirle que hable español en Ecuador</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1CPuT2MIgjU-mFmKou8RgdwrooFzq7nYU/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Publicación de Facebook poniendo excusas por no hablar español</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1k-3DlajXTZvWMUQzLgjjoZQKn07Ixbzo/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Su respuesta a los ecuatorianos que le dicen que hable español: una amiga enseñándole cómo decirles a los ecuatorianos que “se callen la puta boca”</div>
+          <p><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7679215335320440078" target="_blank" rel="noopener">Abrir TikTok →</a></p>
         </div>
       </div>
 
-      <p class="note lang-en">Note: Growing or possessing significant quantities of marijuana and driving/parenting under the influence are serious issues under Ecuadorian law and public safety concerns.</p>
-      <p class="note lang-es">Nota: Cultivar o poseer cantidades significativas de marihuana y conducir/cuidar niños bajo la influencia son problemas serios bajo la ley ecuatoriana y preocupaciones de seguridad pública.</p>
-    </div>
-
-    <!-- 2. ANTI-SPANISH / DISRESPECT -->
-    <div class="section">
-      <h2>🗣️ <span class="lang-inline-en">2. Refusal to speak Spanish & disrespect toward Ecuadorians</span><span class="lang-inline-es">2. Negativa a hablar español y falta de respeto hacia los ecuatorianos</span></h2>
-
-      <p class="lang-en">Instead of learning the local language, she mocks people who tell her to speak Spanish and shares content teaching how to tell Ecuadorians to shut up.</p>
-      <p class="lang-es">En lugar de aprender el idioma local, se burla de las personas que le dicen que hable español y comparte contenido enseñando cómo decirle a los ecuatorianos que se callen.</p>
-
-      <div class="evidence">
-        <div class="label lang-en">Making fun of people for telling her to speak Spanish in Ecuador</div>
-        <div class="label lang-es">Burlándose de la gente por decirle que hable español en Ecuador</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/1CPuT2MIgjU-mFmKou8RgdwrooFzq7nYU/preview" allow="autoplay" loading="lazy"></iframe>
+      <div class="section">
+        <h2>💰 3. “Jubilada” a los ~30, viviendo a costa del contribuyente ecuatoriano</h2>
+        <p>Se presenta como jubilada y que nunca necesita trabajar porque su esposo recibe discapacidad militar de EE.UU. Mientras tanto admite pagar solo impuestos prediales, no pagar impuestos sobre ingresos extranjeros (TikTok etc.), manda a un hijo a escuela pública y usa el sistema de salud público repetidamente — vive a costa del contribuyente ecuatoriano.</p>
+        <div class="evidence">
+          <div class="label">Diciendo que está jubilada porque su esposo está discapacitado del ejército — jubilada a los 30</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1cmH8hkXnhzrG4JBmctUK8OnraIHJT-6j/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <p style="margin-top:8px"><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7657677573618552078" target="_blank" rel="noopener">TikTok – vive de la discapacidad militar de su esposo →</a></p>
         </div>
-      </div>
-
-      <div class="evidence">
-        <div class="label lang-en">Facebook post making excuses for not speaking Spanish</div>
-        <div class="label lang-es">Publicación de Facebook poniendo excusas por no hablar español</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/1k-3DlajXTZvWMUQzLgjjoZQKn07Ixbzo/preview" allow="autoplay" loading="lazy"></iframe>
-        </div>
-      </div>
-
-      <div class="evidence">
-        <div class="label lang-en">Her response to Ecuadorians telling her to speak Spanish: a friend teaching her how to tell Ecuadorians to “shut the fuck up”</div>
-        <div class="label lang-es">Su respuesta a los ecuatorianos que le dicen que hable español: una amiga enseñándole cómo decirles a los ecuatorianos que “se callen la puta boca”</div>
-        <p><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7679215335320440078" target="_blank" rel="noopener">Open TikTok →</a></p>
-      </div>
-    </div>
-
-    <!-- 3. RETIRED / TAXES / PUBLIC SERVICES -->
-    <div class="section">
-      <h2>💰 <span class="lang-inline-en">3. “Retired” at ~30, living off Ecuadorian taxpayers</span><span class="lang-inline-es">3. “Jubilada” a los ~30, viviendo a costa del contribuyente ecuatoriano</span></h2>
-
-      <p class="lang-en">She presents herself as retired and never needing to work because her husband receives U.S. military disability. Meanwhile she admits to only paying property taxes, not paying taxes on foreign income (TikTok etc.), sends a child to public school, and uses the public healthcare system repeatedly — living off Ecuadorian taxpayers.</p>
-      <p class="lang-es">Se presenta como jubilada y que nunca necesita trabajar porque su esposo recibe discapacidad militar de EE.UU. Mientras tanto admite pagar solo impuestos prediales, no pagar impuestos sobre ingresos extranjeros (TikTok etc.), manda a un hijo a escuela pública y usa el sistema de salud público repetidamente — vive a costa del contribuyente ecuatoriano.</p>
-
-      <div class="evidence">
-        <div class="label lang-en">Saying she is retired because her husband is disabled from the military — retired at 30</div>
-        <div class="label lang-es">Diciendo que está jubilada porque su esposo está discapacitado del ejército — jubilada a los 30</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/1cmH8hkXnhzrG4JBmctUK8OnraIHJT-6j/preview" allow="autoplay" loading="lazy"></iframe>
-        </div>
-        <p style="margin-top:8px"><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7657677573618552078" target="_blank" rel="noopener">TikTok – lives off husband’s military disability →</a></p>
-      </div>
-
-      <div class="evidence">
-        <div class="label lang-en">Admitting she only pays property taxes in Ecuador</div>
-        <div class="label lang-es">Admitiendo que solo paga impuestos prediales en Ecuador</div>
-        <div class="media-row">
-          <div class="media">
-            <iframe src="https://drive.google.com/file/d/1kyp_nhOrGM8lSKZXupisYivu4682J9Wp/preview" allow="autoplay" loading="lazy"></iframe>
-          </div>
-          <div class="media">
-            <iframe src="https://drive.google.com/file/d/1VUaLD8gl7fGEdER8GJrNf-gOAbWYk0d8/preview" allow="autoplay" loading="lazy"></iframe>
+        <div class="evidence">
+          <div class="label">Admitiendo que solo paga impuestos prediales en Ecuador</div>
+          <div class="media-row">
+            <div class="media"><iframe src="https://drive.google.com/file/d/1kyp_nhOrGM8lSKZXupisYivu4682J9Wp/preview" allow="autoplay" loading="lazy"></iframe></div>
+            <div class="media"><iframe src="https://drive.google.com/file/d/1VUaLD8gl7fGEdER8GJrNf-gOAbWYk0d8/preview" allow="autoplay" loading="lazy"></iframe></div>
           </div>
         </div>
-      </div>
-
-      <div class="evidence">
-        <div class="label lang-en">Admitting she was not paying taxes on foreign income such as TikTok (after being called out)</div>
-        <div class="label lang-es">Admitiendo que no estaba pagando impuestos sobre ingresos extranjeros como TikTok (después de ser señalada)</div>
-        <div class="media-row">
-          <div class="media">
-            <iframe src="https://drive.google.com/file/d/1k3DCeRNli9QVNe9xzLPeqE7xzU98ZPlb/preview" allow="autoplay" loading="lazy"></iframe>
-          </div>
-          <div class="media">
-            <iframe src="https://drive.google.com/file/d/1B699GSBic5dfLySg0sD7B9SalIDHPsOZ/preview" allow="autoplay" loading="lazy"></iframe>
+        <div class="evidence">
+          <div class="label">Admitiendo que no estaba pagando impuestos sobre ingresos extranjeros como TikTok</div>
+          <div class="media-row">
+            <div class="media"><iframe src="https://drive.google.com/file/d/1k3DCeRNli9QVNe9xzLPeqE7xzU98ZPlb/preview" allow="autoplay" loading="lazy"></iframe></div>
+            <div class="media"><iframe src="https://drive.google.com/file/d/1B699GSBic5dfLySg0sD7B9SalIDHPsOZ/preview" allow="autoplay" loading="lazy"></iframe></div>
           </div>
         </div>
-      </div>
-
-      <div class="evidence">
-        <div class="label lang-en">Sending one of her kids to public school (which she does not adequately fund through taxes)</div>
-        <div class="label lang-es">Enviando a uno de sus hijos a escuela pública (que no financia adecuadamente con impuestos)</div>
-        <p><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7677792336109260046" target="_blank" rel="noopener">Open TikTok →</a></p>
-      </div>
-
-      <div class="evidence">
-        <div class="label lang-en">Kids and husband have been to the hospital multiple times. They use the public healthcare system (not private). Property taxes do not cover this level of usage.</div>
-        <div class="label lang-es">Sus hijos y esposo han ido al hospital múltiples veces. Usan el sistema de salud público (no privado). Los impuestos prediales no cubren este nivel de uso.</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/1_MYVlR78xMK7tjWH9c7piFvirfKVU7Me/preview" allow="autoplay" loading="lazy"></iframe>
+        <div class="evidence">
+          <div class="label">Enviando a uno de sus hijos a escuela pública</div>
+          <p><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7677792336109260046" target="_blank" rel="noopener">Abrir TikTok →</a></p>
+        </div>
+        <div class="evidence">
+          <div class="label">Sus hijos y esposo han ido al hospital múltiples veces. Usan el sistema de salud público.</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1_MYVlR78xMK7tjWH9c7piFvirfKVU7Me/preview" allow="autoplay" loading="lazy"></iframe></div>
         </div>
       </div>
+
+      <div class="section">
+        <h2>📎 Adicional</h2>
+        <div class="evidence">
+          <div class="label">Shae Finn diciendo que Lawful Expat es un ser humano horrible</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1pKGQ-Jg-R7MWdVeFXIIEH7jpA8Vp95jD/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Foto con su esposo Michael Finn</div>
+          <div class="media"><img src="https://drive.google.com/thumbnail?id=1Gvc2p9syvPQGfL7a4-R5VhGYuk0k4nqO&sz=w800" alt="Con esposo" loading="lazy"></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Tatuaje de tigre del esposo Michael Finn (sospechoso)</div>
+          <div class="media"><img src="https://drive.google.com/thumbnail?id=1yrRQv8OcYBM4ioMbaQJ0mEpgaoJsUHcg&sz=w800" alt="Tatuaje de tigre" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>🚨 4. Apoyo a una asesina de niños — peligro para sus propios hijos</h2>
+        <p>Shae Finn ha republicado y apoyado públicamente contenido pidiendo “Liberen a Lyndsay Clancy.” Lyndsay Clancy fue condenada por asesinar a sus propios hijos. Una madre que difunde y defiende a una asesina de niños mientras ella misma usa marihuana cerca de sus hijos, los lleva al supermercado drogada y vive en un ambiente de consumo abierto de drogas plantea serias preocupaciones sobre la seguridad de sus propios hijos.</p>
+        <div class="evidence">
+          <div class="label">Republicando “Free Lyndsay Clancy” y contenido pro-Lyndsay Clancy</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1rsThsqN1ky9jfTOOs-xXEmyz3YOYXLA0/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <p class="note">Lyndsay Clancy fue condenada por asesinar a sus propios hijos.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>⚠️ Por qué esto importa para Ecuador</h2>
+        <p>Una extranjera que usa abiertamente y parece cultivar marihuana, se niega a integrarse lingüísticamente, se burla de los locales, vive a costa del contribuyente ecuatoriano a través de escuelas públicas y salud pública mientras minimiza sus propias contribuciones fiscales, y apoya públicamente a una asesina de niños condenada es un costo neto y un peligro potencial para Ecuador. Estos comportamientos plantean preguntas legítimas sobre si a tal persona se le debió haber otorgado la residencia en primer lugar.</p>
+      </div>
+
+      <footer>Documentación de interés público · lawfulexpat</footer>
     </div>
+  </div>
 
-    <!-- ADDITIONAL -->
-    <div class="section">
-      <h2>📎 <span class="lang-inline-en">Additional</span><span class="lang-inline-es">Adicional</span></h2>
+  <!-- ENGLISH VERSION -->
+  <div class="content-en">
+    <div class="container">
+      <header>
+        <img src="https://drive.google.com/thumbnail?id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH&sz=w400" alt="Shae Finn" class="avatar" onerror="this.src='https://drive.google.com/uc?export=view&id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH'">
+        <h1>Shae Leigh Finn – the gringa living in Ecuador who grows and consumes marijuana, refuses to speak Spanish, and lives off Ecuadorian taxpayers while using public services she barely pays for</h1>
+        <p class="subtitle">Documentation compiled from her own social media posts, TikToks, Facebook statements and public admissions.</p>
+      </header>
 
-      <div class="evidence">
-        <div class="label lang-en">Shae Finn calling Lawful Expat a horrible human being</div>
-        <div class="label lang-es">Shae Finn diciendo que Lawful Expat es un ser humano horrible</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/1pKGQ-Jg-R7MWdVeFXIIEH7jpA8Vp95jD/preview" allow="autoplay" loading="lazy"></iframe>
+      <div class="section">
+        <h2>👤 Profile</h2>
+        <div class="profile-grid">
+          <div><strong>Name:</strong> Shae Leigh Finn</div>
+          <div><strong>From:</strong> Lubbock, Texas, United States</div>
+          <div><strong>Living in:</strong> Vilcabamba, Loja, Ecuador</div>
+          <div><strong>Husband:</strong> Michael Finn</div>
         </div>
       </div>
 
-      <div class="evidence">
-        <div class="label lang-en">Photo with husband Michael Finn</div>
-        <div class="label lang-es">Foto con su esposo Michael Finn</div>
-        <div class="media">
-          <img src="https://drive.google.com/thumbnail?id=1Gvc2p9syvPQGfL7a4-R5VhGYuk0k4nqO&sz=w800" alt="With husband" loading="lazy"
-               onerror="this.src='https://drive.google.com/uc?export=view&id=1Gvc2p9syvPQGfL7a4-R5VhGYuk0k4nqO'">
+      <div class="section">
+        <h2>📱 Social media</h2>
+        <div class="socials">
+          <a href="https://www.tiktok.com/@lifeabroadwithshae" target="_blank" rel="noopener">TikTok @lifeabroadwithshae</a>
+          <a href="https://www.instagram.com/lifeabroadwithshae" target="_blank" rel="noopener">Instagram @lifeabroadwithshae</a>
+          <a href="https://www.facebook.com/shaeleighf" target="_blank" rel="noopener">Facebook shaeleighf</a>
         </div>
       </div>
 
-      <div class="evidence">
-        <div class="label lang-en">Husband Michael Finn’s tiger tattoo (suspicious)</div>
-        <div class="label lang-es">Tatuaje de tigre del esposo Michael Finn (sospechoso)</div>
-        <div class="media">
-          <img src="https://drive.google.com/thumbnail?id=1yrRQv8OcYBM4ioMbaQJ0mEpgaoJsUHcg&sz=w800" alt="Tiger tattoo" loading="lazy"
-               onerror="this.src='https://drive.google.com/uc?export=view&id=1yrRQv8OcYBM4ioMbaQJ0mEpgaoJsUHcg'">
+      <div class="section">
+        <h2>🌿 1. Marijuana & Drug Use</h2>
+        <p>Shae Finn openly posts about marijuana use and cultivation-related content while living in Ecuador on a visa.</p>
+        <div class="evidence">
+          <div class="label">Holding a large jar of marijuana</div>
+          <div class="media"><img src="https://drive.google.com/thumbnail?id=1rPsPlObZ3d1BkJgB36Ip-3wdW3-g13xH&sz=w1000" alt="Jar of marijuana" loading="lazy"></div>
+          <div class="media" style="margin-top:12px"><iframe src="https://drive.google.com/file/d/1kdAYeGvjSecVNyKsgUMLbFVXqdzvqLWG/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Using hashtags #gardentok, #gardenmom, #gardening on the marijuana TikTok</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1LfNPOMyWcMUij9AkyUCkXWdjWJUEAU0G/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Saying she has a large property (where she will likely grow marijuana)</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/10vc4zMtqDnGoySox4yA_Ic6SVlUzABfW/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Photos of her smoking a joint</div>
+          <div class="media-row">
+            <div class="media"><img src="https://drive.google.com/thumbnail?id=1Gvc2p9syvPQGfL7a4-R5VhGYuk0k4nqO&sz=w800" alt="Smoking 1" loading="lazy"></div>
+            <div class="media"><img src="https://drive.google.com/thumbnail?id=1EHsr9pqbVlf3AmNtwl6qlBY_akLqqLNY&sz=w800" alt="Smoking 2" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="evidence">
+          <div class="label">Bragging about going to Supermaxi with husband and kids while stoned — she states it multiple times. Husband was also stoned.</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1rAPjraqZ-_eMZdQbXsyj-K1-mzprKzDM/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <p class="note">Note: Growing or possessing significant quantities of marijuana and driving/parenting under the influence are serious issues under Ecuadorian law and public safety concerns.</p>
+      </div>
+
+      <div class="section">
+        <h2>🗣️ 2. Refusal to speak Spanish & disrespect toward Ecuadorians</h2>
+        <p>Instead of learning the local language, she mocks people who tell her to speak Spanish and shares content teaching how to tell Ecuadorians to shut up.</p>
+        <div class="evidence">
+          <div class="label">Making fun of people for telling her to speak Spanish in Ecuador</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1CPuT2MIgjU-mFmKou8RgdwrooFzq7nYU/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Facebook post making excuses for not speaking Spanish</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1k-3DlajXTZvWMUQzLgjjoZQKn07Ixbzo/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Her response to Ecuadorians telling her to speak Spanish: a friend teaching her how to tell Ecuadorians to “shut the fuck up”</div>
+          <p><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7679215335320440078" target="_blank" rel="noopener">Open TikTok →</a></p>
         </div>
       </div>
+
+      <div class="section">
+        <h2>💰 3. “Retired” at ~30, living off Ecuadorian taxpayers</h2>
+        <p>She presents herself as retired and never needing to work because her husband receives U.S. military disability. Meanwhile she admits to only paying property taxes, not paying taxes on foreign income (TikTok etc.), sends a child to public school, and uses the public healthcare system repeatedly — living off Ecuadorian taxpayers.</p>
+        <div class="evidence">
+          <div class="label">Saying she is retired because her husband is disabled from the military — retired at 30</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1cmH8hkXnhzrG4JBmctUK8OnraIHJT-6j/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <p style="margin-top:8px"><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7657677573618552078" target="_blank" rel="noopener">TikTok – lives off husband’s military disability →</a></p>
+        </div>
+        <div class="evidence">
+          <div class="label">Admitting she only pays property taxes in Ecuador</div>
+          <div class="media-row">
+            <div class="media"><iframe src="https://drive.google.com/file/d/1kyp_nhOrGM8lSKZXupisYivu4682J9Wp/preview" allow="autoplay" loading="lazy"></iframe></div>
+            <div class="media"><iframe src="https://drive.google.com/file/d/1VUaLD8gl7fGEdER8GJrNf-gOAbWYk0d8/preview" allow="autoplay" loading="lazy"></iframe></div>
+          </div>
+        </div>
+        <div class="evidence">
+          <div class="label">Admitting she was not paying taxes on foreign income such as TikTok</div>
+          <div class="media-row">
+            <div class="media"><iframe src="https://drive.google.com/file/d/1k3DCeRNli9QVNe9xzLPeqE7xzU98ZPlb/preview" allow="autoplay" loading="lazy"></iframe></div>
+            <div class="media"><iframe src="https://drive.google.com/file/d/1B699GSBic5dfLySg0sD7B9SalIDHPsOZ/preview" allow="autoplay" loading="lazy"></iframe></div>
+          </div>
+        </div>
+        <div class="evidence">
+          <div class="label">Sending one of her kids to public school</div>
+          <p><a href="https://www.tiktok.com/@lifeabroadwithshae/video/7677792336109260046" target="_blank" rel="noopener">Open TikTok →</a></p>
+        </div>
+        <div class="evidence">
+          <div class="label">Kids and husband have been to the hospital multiple times. They use the public healthcare system.</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1_MYVlR78xMK7tjWH9c7piFvirfKVU7Me/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>📎 Additional</h2>
+        <div class="evidence">
+          <div class="label">Shae Finn calling Lawful Expat a horrible human being</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1pKGQ-Jg-R7MWdVeFXIIEH7jpA8Vp95jD/preview" allow="autoplay" loading="lazy"></iframe></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Photo with husband Michael Finn</div>
+          <div class="media"><img src="https://drive.google.com/thumbnail?id=1Gvc2p9syvPQGfL7a4-R5VhGYuk0k4nqO&sz=w800" alt="With husband" loading="lazy"></div>
+        </div>
+        <div class="evidence">
+          <div class="label">Husband Michael Finn’s tiger tattoo (suspicious)</div>
+          <div class="media"><img src="https://drive.google.com/thumbnail?id=1yrRQv8OcYBM4ioMbaQJ0mEpgaoJsUHcg&sz=w800" alt="Tiger tattoo" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>🚨 4. Support for a child murderer — danger to her own kids</h2>
+        <p>Shae Finn has publicly reposted and supported content calling to “Free Lyndsay Clancy.” Lyndsay Clancy was convicted of murdering her own children. A mother who platforms and defends a child killer while herself using marijuana around her kids, taking them to the supermarket while stoned, and living in an environment of open drug use raises serious concerns about the safety of her own children.</p>
+        <div class="evidence">
+          <div class="label">Reposting “Free Lyndsay Clancy” and pro-Lyndsay Clancy content</div>
+          <div class="media"><iframe src="https://drive.google.com/file/d/1rsThsqN1ky9jfTOOs-xXEmyz3YOYXLA0/preview" allow="autoplay" loading="lazy"></iframe></div>
+          <p class="note">Lyndsay Clancy was convicted of murdering her own children.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>⚠️ Why this matters for Ecuador</h2>
+        <p>A foreigner who openly uses and appears to cultivate marijuana, refuses to integrate linguistically, mocks locals, lives off Ecuadorian taxpayers through public schools and public healthcare while minimizing her own tax contributions, and publicly supports a convicted child murderer is a net cost and potential danger to Ecuador. These behaviors raise legitimate questions about whether such a person should have been granted residency in the first place.</p>
+      </div>
+
+      <footer>Documentation for public interest · lawfulexpat</footer>
     </div>
-
-    <!-- 4. DANGER TO HER KIDS / LYNDSAY CLANCY -->
-    <div class="section">
-      <h2>🚨 <span class="lang-inline-en">4. Support for a child murderer — danger to her own kids</span><span class="lang-inline-es">4. Apoyo a una asesina de niños — peligro para sus propios hijos</span></h2>
-
-      <p class="lang-en">
-        Shae Finn has publicly reposted and supported content calling to “Free Lyndsay Clancy.” Lyndsay Clancy was convicted of murdering her own children. A mother who platforms and defends a child killer while herself using marijuana around her kids, taking them to the supermarket while stoned, and living in an environment of open drug use raises serious concerns about the safety of her own children.
-      </p>
-      <p class="lang-es">
-        Shae Finn ha republicado y apoyado públicamente contenido pidiendo “Liberen a Lyndsay Clancy.” Lyndsay Clancy fue condenada por asesinar a sus propios hijos. Una madre que difunde y defiende a una asesina de niños mientras ella misma usa marihuana cerca de sus hijos, los lleva al supermercado drogada y vive en un ambiente de consumo abierto de drogas plantea serias preocupaciones sobre la seguridad de sus propios hijos.
-      </p>
-
-      <div class="evidence">
-        <div class="label lang-en">Reposting “Free Lyndsay Clancy” and pro-Lyndsay Clancy content</div>
-        <div class="label lang-es">Republicando “Free Lyndsay Clancy” y contenido pro-Lyndsay Clancy</div>
-        <div class="media">
-          <iframe src="https://drive.google.com/file/d/1rsThsqN1ky9jfTOOs-xXEmyz3YOYXLA0/preview" allow="autoplay" loading="lazy"></iframe>
-        </div>
-        <p class="note lang-en">Lyndsay Clancy was convicted of murdering her own children.</p>
-        <p class="note lang-es">Lyndsay Clancy fue condenada por asesinar a sus propios hijos.</p>
-      </div>
-    </div>
-
-    <!-- SUMMARY -->
-    <div class="section">
-      <h2>⚠️ <span class="lang-inline-en">Why this matters for Ecuador</span><span class="lang-inline-es">Por qué esto importa para Ecuador</span></h2>
-      <p class="lang-en">
-        A foreigner who openly uses and appears to cultivate marijuana, refuses to integrate linguistically, mocks locals, lives off Ecuadorian taxpayers through public schools and public healthcare while minimizing her own tax contributions, and publicly supports a convicted child murderer is a net cost and potential danger to Ecuador. These behaviors raise legitimate questions about whether such a person should have been granted residency in the first place.
-      </p>
-      <p class="lang-es">
-        Una extranjera que usa abiertamente y parece cultivar marihuana, se niega a integrarse lingüísticamente, se burla de los locales, vive a costa del contribuyente ecuatoriano a través de escuelas públicas y salud pública mientras minimiza sus propias contribuciones fiscales, y apoya públicamente a una asesina de niños condenada es un costo neto y un peligro potencial para Ecuador. Estos comportamientos plantean preguntas legítimas sobre si a tal persona se le debió haber otorgado la residencia en primer lugar.
-      </p>
-    </div>
-
-    <footer>
-      Documentation for public interest · lawfulexpat
-    </footer>
   </div>
 
   <script>
@@ -367,11 +384,17 @@
       }
       document.getElementById('btn-en').classList.toggle('active', lang === 'en');
       document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-      localStorage.setItem('lang', lang);
+      try { localStorage.setItem('lang', lang); } catch (e) {}
     }
-    // restore preference (Spanish is default)
-    const saved = localStorage.getItem('lang');
-    if (saved === 'en') setLang('en');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('btn-en').addEventListener('click', () => setLang('en'));
+      document.getElementById('btn-es').addEventListener('click', () => setLang('es'));
+
+      try {
+        if (localStorage.getItem('lang') === 'en') setLang('en');
+      } catch (e) {}
+    });
   </script>
 </body>
 </html>
